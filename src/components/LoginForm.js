@@ -1,30 +1,35 @@
 import React from "react";
 import "../styles/LoginForm.css";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const LoginForm = () => {
+  const { login } = useAuth();
   const navigation = useNavigate();
   const token = localStorage.getItem("token");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const handleLogin = () => {
-    fetch("/login", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-    })
-      .then((res) => res.json())
-      .then((data) => {localStorage.setItem("token", data.idToken)
-      console.log(data)} )
-      .then(() => navigation("/"))
-      .catch((err) => console.log(err));
+  const handleLogin = async () => {
+    await login(email, password)
+      .then((userCredential) => {
+        // Signed in
+        localStorage.setItem("token", userCredential.user.accessToken);
+        // console(userCredential)
+        navigation("/");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        // ..
+      });
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigation("/");
   };
   
   return (
     <div>
-      { token ? <button>Logout</button> : 
+      { token ? <button onClick={handleLogout}>Logout</button> : 
     <div className="login-page">
       <div className="login-picture">
       <i className="fa-regular fa-user"></i>
