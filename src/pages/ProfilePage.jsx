@@ -3,10 +3,12 @@ import Menu from '../components/Menu'
 import Profile from '../components/Profile'
 
 const ProfilePage = () => {
+  const token = localStorage.getItem('token')
   return (
     <div id="dash" style={ {display: 'flex'}}>
     <Menu />
-    <Profile />
+    { token ? <Profile /> : window.location.href = '/login' }
+    
   </div>
   )
 }

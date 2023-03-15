@@ -1,9 +1,11 @@
 import React from 'react'
 import "../styles/Menu.css"
-
+import { useAuth } from "../context/AuthContext";
 const Menu = () => {
+    const { signOut } = useAuth();
     const token = localStorage.getItem("token");
     const handleLogout = () => {
+        signOut();
         localStorage.removeItem("token");
         window.location.reload();
       };

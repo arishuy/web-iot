@@ -2,26 +2,47 @@ import React from "react";
 import "../styles/Profile.css";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
-import { useEffect } from "react";
 import { updateProfile } from "firebase/auth";
 import { Snackbar } from "@mui/material";
 import { Alert } from "@mui/material";
+import { Button } from "@mui/material";
+import { updatePassword } from "firebase/auth";
 
 const Profile = () => {
-  const { currentUser } = useAuth();
+  const { currentUser } = useAuth();  
   const [name, setName] = React.useState(currentUser.displayName);
   const [email, setEmail] = React.useState(currentUser.email);
   const [phoneNumber, setPhoneNumber] = React.useState(currentUser.phoneNumber);
   const [photoURL, setPhotoURL] = React.useState(currentUser.photoURL);
+  const [newPassword, setNewPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
   const [isUpdate, setIsUpdate] = React.useState(false);
+  console.log(currentUser)
+  const handleChangePassword = () => {
+      if (newPassword === confirmPassword) {
+        updatePassword(currentUser, newPassword)
+          .then(() => {
+            setIsUpdate(true);
+            document.getElementById("password_form").style.display = "none";
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+      else {
+        alert("New password and confirm password are not the same");
+      }
+  }
+  const handleDisplayForm = () => {
+    document.getElementById("password_form").style.display = "block";
+  }
+  const handleCloseForm = () => {
+    document.getElementById("password_form").style.display = "none";
+  }
   const handleSave = () => {
     updateProfile(currentUser, {
       displayName: name,
-      email: email,
-      phoneNumber: phoneNumber,
       photoURL: photoURL,
     })
       .then(() => {
@@ -40,6 +61,23 @@ const Profile = () => {
     };
   return (
     <div className="profile">
+      <div id="password_form" style={{position: "fixed", top: "30%", left: "40%", backgroundColor: "white", display: "none", zIndex: 999}}>
+      <Box sx={{ width: "100%", "& .MuiTextField-root": { m: 2, width: "37ch" }}}>
+        <span className="title-form"> Change Password </span>
+        <div>
+        <TextField id="filled-basic" label="New Password" variant="filled" onChange={
+          (e) => setNewPassword(e.target.value)
+        } />
+        </div>
+        <div>
+        <TextField id="filled-basic" label="Password Confirm" variant="filled" onChange={
+          (e) => setConfirmPassword(e.target.value)
+        } />
+        </div>
+        <Button variant="contained" style={{margin: '5px', float: "right", marginRight: '15px', marginBottom: '10px' }} onClick={handleChangePassword}>Change</Button>
+        <Button variant="contained" color="error" style={{margin: '5px', float: "right" }} onClick={handleCloseForm}>Cancel</Button>
+      </Box>
+    </div>
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         open={isUpdate}
@@ -47,7 +85,7 @@ const Profile = () => {
         onClose={handleClose}
       >
         <Alert severity="success" sx={{ width: "100%" }}>
-          Update successful
+          Update successful!
         </Alert>
       </Snackbar>
       <h1> Profile: </h1>
@@ -66,7 +104,7 @@ const Profile = () => {
               {currentUser.displayName ? currentUser.displayName : ""}
             </span>
           </div>
-          <button className="profile-button">Upload Picture</button>
+          <button className="profile-button" onClick={handleDisplayForm}>Change Password</button>
         </div>
 
         <div className="profile-content">
@@ -93,7 +131,7 @@ const Profile = () => {
                 label="Email Address"
                 variant="outlined"
                 defaultValue={currentUser.email ? currentUser.email : ""}
-                onChange={(e) => setEmail(e.target.value)}
+                disabled
               />
               <TextField
                 id="outlined-basic"
@@ -116,8 +154,9 @@ const Profile = () => {
           >
             <TextField
               id="outlined-basic"
-              label="Address"
+              label="Photo URL"
               variant="outlined"
+              defaultValue={currentUser.photoURL ? currentUser.photoURL : ""}
               fullWidth
             />
           </Box>

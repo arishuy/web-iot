@@ -29,7 +29,7 @@ const LoginForm = () => {
   
   return (
     <div>
-      { token ? <button onClick={handleLogout}>Logout</button> : 
+      { token ? window.location.href = "/"  : 
     <div className="login-page">
       <div className="login-picture">
       <i className="fa-regular fa-user"></i>

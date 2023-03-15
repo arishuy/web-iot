@@ -27,6 +27,9 @@ export function AuthProvider({ children }) {
   function getUser() {
     return auth.currentUser
   }
+  function ChangePassword(password) {
+    return auth.currentUser.updatePassword(password)
+  }
 
   function isAdmin() {
     return auth.currentUser.getIdTokenResult()
@@ -57,7 +60,8 @@ export function AuthProvider({ children }) {
     getUser,
     login,
     signOut,
-    signUp
+    signUp,
+    ChangePassword,
   }
 
   return (
