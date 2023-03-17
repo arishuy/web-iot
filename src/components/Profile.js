@@ -157,6 +157,7 @@ const Profile = () => {
               label="Photo URL"
               variant="outlined"
               defaultValue={currentUser.photoURL ? currentUser.photoURL : ""}
+              onChange={(e) => setPhotoURL(e.target.value)}
               fullWidth
             />
           </Box>
