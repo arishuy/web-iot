@@ -44,6 +44,7 @@ const Profile = () => {
     updateProfile(currentUser, {
       displayName: name,
       photoURL: photoURL,
+      phoneNumber: phoneNumber,
     })
       .then(() => {
         console.log("Update successful");

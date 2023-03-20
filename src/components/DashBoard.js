@@ -1,6 +1,7 @@
 import React from 'react'
 import "../styles/DashBoard.css"
 import FaceDetector from './FaceDetector'
+import Homepage from './Homepage';
 
 
 const DashBoard = () => {
@@ -13,7 +14,7 @@ const DashBoard = () => {
       <FaceDetector />
       </div>
       :
-      <h1 className="header_dashboard"> Please Login! </h1>
+      <Homepage />
       }
     </div>
   )
