@@ -44,7 +44,7 @@ const FaceDetector = () => {
         let image = dataURLtoFile(imageSrc, "image");
         let formData = new FormData();
         formData.set("image", image);
-        let data = await axios.post("http://localhost:5000/face_detect", formData, {
+        let data = await axios.post("https://server-iot.onrender.com/face_detect", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
