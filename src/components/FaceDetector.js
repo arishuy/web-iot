@@ -55,7 +55,7 @@ const FaceDetector = () => {
           setBboxes([]);
         }
       }
-    }, 100);
+    }, 500);
     return () => clearInterval(id);
   }, []);
 
