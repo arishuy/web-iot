@@ -1,40 +1,85 @@
-import React from 'react'
-import "../styles/Menu.css"
-import { useAuth } from "../context/AuthContext"
+import React, { useState } from "react";
+import {
+  HomeOutlined,
+  AppstoreOutlined,
+  SettingOutlined,
+  MenuOutlined,
+  AlignLeftOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { Layout, Menu, Button } from "antd";
+import { useNavigate } from "react-router-dom";
+const { Sider } = Layout;
 
-const Menu = () => {
-    const { signOut } = useAuth();
-    const token = localStorage.getItem("token");
-    const handleLogout = () => {
-        signOut();
-        localStorage.removeItem("token");
-        window.location.reload();
-      };
-  return (
-    <div className="menu">
-        <nav className="navigation">
-            <span>WEB IoT</span>
-            <ul>
-                <li><a href="/">
-                <i className="fa-solid fa-house"></i>
-                    Home</a></li>
-                <li><a href="/#"><i className="fa-solid fa-layer-group"></i>Dash Board</a></li>
-                <li><a href="/"><i className="fa-solid fa-gear"></i>Settings</a></li>
-                { token ?<div>
-                    <li><a href="/profile"><i className="fa-solid fa-user"></i>Profile</a></li>
-                    <li><a href="#" onClick={handleLogout}><i className="fa-solid fa-arrow-right-from-bracket"></i>
-                Logout</a></li>
-                </div> 
-                 :
-                <div>
-                    <li><a href="/login"><i className="fa-solid fa-key"></i>Login</a></li>
-                    <li><a href="/register"><i className="fa-solid fa-registered"></i>Register</a></li>
-                    </div>
-                }
-            </ul>
-        </nav>
-    </div>
-  )
+function getItem(label, key, icon, children, type) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  };
 }
+const items = [
+  getItem("Home", "", <HomeOutlined />),
+  getItem("Dashboard", "dashboard", <AppstoreOutlined />),
+  getItem("Settings", "setting", <SettingOutlined />),
+  getItem("Profile", "profile", <UserOutlined />),
+];
+const Siderbar = () => {
+  const navigation = useNavigate();
+  const token = localStorage.getItem("token");
+  const [collapsed, setCollapsed] = useState(false);
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
+  const handleClick = (id) => {
+    navigation(`/${id}`);
+  };
+  return (
+    <Sider
+      width="265px"
+      style={{
+        overflow: "auto",
+        height: "100vh",
+        fontFamily: "Roboto, sans-serif",
+        fontWeight: "400",
+      }}
+      collapsible
+      collapsed={collapsed}
+      trigger={null}
+    >
+      <div style={{ height: 32, margin: 16, background: "none" }}>
+        <Button
+          type="primary"
+          onClick={toggleCollapsed}
+          style={{ background: "none" }}
+        >
+          {collapsed ? <AlignLeftOutlined /> : <MenuOutlined />}
+        </Button>
+        {collapsed ? null : (
+          <a
+            href="/"
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "white", fontWeight: "bold", fontSize: "26px" }}
+          >
+            WEB IoT
+          </a>
+        )}
+      </div>
+      {token ? (
+        <Menu
+          onClick={({ keyPath }) => handleClick(keyPath)}
+          theme="dark"
+          defaultSelectedKeys={["1"]}
+          mode="inline"
+          items={items}
+          style={{ background: "none" }}
+        />
+      ) : null}
+    </Sider>
+  );
+};
 
-export default Menu
+export default Siderbar;

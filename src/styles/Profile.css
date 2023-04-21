@@ -4,8 +4,7 @@ h1 {
     padding: 15px;
 }
 .profile {
-    width: 82vw;
-    background: white;
+    width: 80vw;
 }
 .profile-container {
     display: flex;

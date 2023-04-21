@@ -18,7 +18,6 @@ const Profile = () => {
   const [newPassword, setNewPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [isUpdate, setIsUpdate] = React.useState(false);
-  console.log(currentUser)
   const handleChangePassword = () => {
       if (newPassword === confirmPassword) {
         updatePassword(currentUser, newPassword)
@@ -64,7 +63,9 @@ const Profile = () => {
     <div className="profile">
       <div id="password_form" style={{position: "fixed", top: "30%", left: "40%", backgroundColor: "white", display: "none", zIndex: 999}}>
       <Box sx={{ width: "100%", "& .MuiTextField-root": { m: 2, width: "37ch" }}}>
-        <span className="title-form"> Change Password </span>
+        <div style={{textAlign: 'center'}}>
+          <span className="title-form"> Change Password </span>
+          </div>
         <div>
         <TextField id="filled-basic" label="New Password" variant="filled" onChange={
           (e) => setNewPassword(e.target.value)
