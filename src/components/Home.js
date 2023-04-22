@@ -2,7 +2,7 @@ import React from 'react'
 import logo from '../asset/logo.png'
 import "../styles/Homepage.css"
 
-const Homepage = () => {
+const Home = () => {
   return (
     <div className="homepage-content">
         <div className="homepage-logo">
@@ -15,4 +15,4 @@ const Homepage = () => {
   )
 }
 
-export default Homepage
+export default Home

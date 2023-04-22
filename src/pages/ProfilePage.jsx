@@ -2,7 +2,7 @@ import React from 'react'
 import Menu from '../components/Menu'
 import Headerbar from '../components/Headerbar';
 import Profile from '../components/Profile';
-import { Layout, theme} from 'antd';
+import { Layout} from 'antd';
 const { Header, Content, Footer } = Layout;
 
 const DashBoardPage = () => {

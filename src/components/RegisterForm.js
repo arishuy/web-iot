@@ -2,9 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/LoginForm.css";
 import { useAuth } from "../context/AuthContext";
-import { db } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
 
 const RegisterForm = () => {
   const { signUp } = useAuth();

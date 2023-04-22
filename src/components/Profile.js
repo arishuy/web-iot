@@ -12,7 +12,6 @@ import { updatePassword } from "firebase/auth";
 const Profile = () => {
   const { currentUser } = useAuth();  
   const [name, setName] = React.useState(currentUser.displayName);
-  const [email, setEmail] = React.useState(currentUser.email);
   const [phoneNumber, setPhoneNumber] = React.useState(currentUser.phoneNumber);
   const [photoURL, setPhotoURL] = React.useState(currentUser.photoURL);
   const [newPassword, setNewPassword] = React.useState("");
