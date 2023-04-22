@@ -1,8 +1,6 @@
-.dashboard {
-}
 .header_dashboard 
 {
-    padding-left: 100px;
+    margin-left: 50px;
     font-weight: bold;
 }
 .face-detector {
