@@ -19,9 +19,9 @@ const Headerbar = () => {
     <div style={{ position: 'absolute', right: 0, marginRight: 20, }}>
             {token ?
           <><Space wrap size={16}>
-                <Avatar src={currentUser.photoURL} />
+                <Avatar  icon={currentUser.photoURL ? null : <UserOutlined />}  src={currentUser.photoURL} />
               </Space>
-              <span style={{marginLeft: '2px'}}>
+              <span style={{marginLeft: '5px'}}>
               {currentUser.displayName}
                 </span>
                 <Button type="ghost" style={{ background: 'none' }}onClick={logout} >

@@ -64,7 +64,7 @@ const DashBoard = () => {
       </Dropdown>
       </div>
       {/* <FaceDetector /> */}
-      <img src={url} alt="Camera stream 1" />
+      <img src={url} alt="Camera stream" />
       <div>
       </div>
       </div>

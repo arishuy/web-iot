@@ -3,9 +3,11 @@ import Menu from '../components/Menu'
 import Headerbar from '../components/Headerbar';
 import Profile from '../components/Profile';
 import { Layout} from 'antd';
+import Home from '../components/Home';
 const { Header, Content, Footer } = Layout;
 
 const DashBoardPage = () => {
+  const token = localStorage.getItem("token");
   return (
     // <div id="dash" style={ {display: 'flex'}}>
     //   <Menu />
@@ -19,7 +21,7 @@ const DashBoardPage = () => {
         </Header>
         <Content style={{ background: '#E7E7E7' }}>
           <div style={{ padding: 24, minHeight: 360 }}>
-            <Profile />
+           {token ?  <Profile /> : <Home />}
           </div>
         </Content>
         <Footer style={{ textAlign: 'center',background: '#EFEFEF' }}>PBL5 IoT</Footer>
