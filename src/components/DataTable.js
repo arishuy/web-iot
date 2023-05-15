@@ -14,6 +14,7 @@ const columns = [
       compare: (a, b) => new Date(a.time) - new Date(b.time),
     },
     sortDirections: ['descend'],
+    defaultSortOrder: 'descend',
   },
 ];
 const DataTable = () => {
@@ -26,7 +27,7 @@ const DataTable = () => {
       console.log(`${doc.id} => ${doc.data()}`);
       data_tb.current.push({
         key: doc.id,
-        name: doc.data().labels,
+        name: doc.data().labels.join(", "),
         time: doc.data().time,
       });
     });
