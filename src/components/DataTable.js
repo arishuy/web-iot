@@ -24,10 +24,9 @@ const DataTable = () => {
   const q = query(collection(db, "data"));
   const querySnapshot = await getDocs(q).then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data()}`);
       data_tb.current.push({
         key: doc.id,
-        name: doc.data().labels.join(", "),
+        name: Object.keys(doc.data().labels).join(", "),
         time: doc.data().time,
       });
     });
