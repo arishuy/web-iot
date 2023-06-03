@@ -24,7 +24,6 @@ const items = [
   getItem("Home", "", <HomeOutlined />),
   getItem("Dashboard", "dashboard", <AppstoreOutlined />),
   getItem("Profile", "profile", <UserOutlined />),
-  getItem("Settings", "setting", <SettingOutlined />),
 ];
 const Siderbar = () => {
   const navigation = useNavigate();
