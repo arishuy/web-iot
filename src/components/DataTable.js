@@ -41,7 +41,7 @@ const DataTable = () => {
   return (
     <>
       <h1>No Mask Detect</h1>
-      KO<Table columns={columns} dataSource={data} size="middle" />
+      <Table columns={columns} dataSource={data} size="middle" />
     </>
   );
 };
