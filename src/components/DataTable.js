@@ -26,7 +26,7 @@ const DataTable = () => {
     querySnapshot.forEach((doc) => {
       data_tb.current.push({
         key: doc.id,
-        name: Object.keys(doc.data().labels).map(key => `${key} ${((key === "with_mask") || (key ==="unknown") || (key === "mask_weared_incorrect")) ? `: ${doc.data().labels[key]}` : '' }`).join(", ").replace(/_/g, " ") ,
+        name: Object.keys(doc.data().labels).map(key => `${key} ${((key === "with_mask") || (key ==="unknown")) ? `: ${doc.data().labels[key]}` : '' }`).join(", ").replace(/_/g, " ") ,
         time: doc.data().time,
       });
     });

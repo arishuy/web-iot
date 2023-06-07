@@ -112,11 +112,13 @@ const Profile = () => {
           <Box
             component="form"
             sx={{
-              "& .MuiTextField-root": { m: 3, width: "37ch" },
+              "& .MuiTextField-root": { m: 3, width: "95%" },
             }}
             noValidate
             autoComplete="off"
           >
+            
+            <div>
             <TextField
               id="outlined-basic"
               label="Name"
@@ -126,7 +128,6 @@ const Profile = () => {
               }
               onChange={(e) => setName(e.target.value)}
             />
-            <div>
               <TextField
                 id="outlined-basic"
                 label="Email Address"
@@ -134,21 +135,12 @@ const Profile = () => {
                 defaultValue={currentUser.email ? currentUser.email : ""}
                 disabled
               />
-              <TextField
-                id="outlined-basic"
-                label="Phone Number"
-                variant="outlined"
-                defaultValue={
-                  currentUser.phoneNumber ? currentUser.phoneNumber : ""
-                }
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
             </div>
           </Box>
           <Box
             component="form"
             sx={{
-              "& .MuiTextField-root": { m: 3, width: "80ch" },
+              "& .MuiTextField-root": { m: 3, width: "95%" },
             }}
             noValidate
             autoComplete="off"

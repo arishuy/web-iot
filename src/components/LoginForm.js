@@ -7,6 +7,7 @@ const LoginForm = () => {
   const { login } = useAuth();
   const navigation = useNavigate();
   const token = localStorage.getItem("token");
+  const [message, setMessage] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const handleLogin = async () => {
@@ -18,8 +19,7 @@ const LoginForm = () => {
         navigation("/");
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        // ..
+        setMessage("Login failed!");
       });
   };
   const handleLogout = () => {
@@ -36,7 +36,7 @@ const LoginForm = () => {
         </div>
       <div className="form">
         <div className="login-form">
-          <h1>Web IoT</h1>
+          <h1 style={{margin: 0}}>Web IoT</h1>
           <input type="text" placeholder="Username" onChange={
             (e) => setEmail(e.target.value)
           }/>
@@ -44,6 +44,7 @@ const LoginForm = () => {
           onChange={
             (e) => setPassword(e.target.value)
           }/>
+          <p style={{color: 'red'}}>{message}</p>
           <button onClick={handleLogin}>Login</button>
           <p className="message">
             Not registered? <a href="/register">Create an account</a>

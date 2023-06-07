@@ -6,37 +6,25 @@ import { useAuth } from "../context/AuthContext";
 const RegisterForm = () => {
   const { signUp } = useAuth();
   const navigator = useNavigate();
+  const [message, setMessage] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
-  // const addUser =  () => {
-  //     const docRef =  addDoc(collection(db, "users"), {
-  //       email: email,
-  //       avatar: "https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png",
-  //       name: "User",
-  //       phonenumber: "0123456789",
-  //       address: "Hanoi"
-  //     }).catch (error => {
-  //       console.error("Error adding document: ", error);
-  //     });
-  //   }
   const handleRegister = () => {
     if (email === "") {
       alert("Email is required");
       return;
     }
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      setMessage("Password not match!");
       return;
     } else {
       signUp(email, password)
         .then(() => {
-          // addUser();
-          // ...
           navigator("/login");
         })
         .catch((error) => {
-          console.log(error);
+          setMessage("Register failed!");
           // ..
         });
     }
@@ -47,7 +35,7 @@ const RegisterForm = () => {
         <i className="fa-solid fa-key"></i>
       </div>
       <div className="form">
-        <h1>Register</h1>
+        <h1 style={{margin: 0}}>Register</h1>
         <div className="register-form">
           <input
             type="email"
@@ -65,6 +53,7 @@ const RegisterForm = () => {
             placeholder="Confirm Password"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
+          <p style={{color: 'red'}}>{message}</p>
           <button onClick={handleRegister}>Create</button>
           <p className="message">
             Already registered?
