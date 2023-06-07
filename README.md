@@ -1,7 +1,9 @@
-# Getting Started with Create React App
+# Hướng dẫn cài dặt 
 
 Chạy web client ở máy khác
+
 Cài đặt server ở một máy khác 
+
 Cài đặt app ở Jeston Nano
 
 Kết nối app và server với nhau
